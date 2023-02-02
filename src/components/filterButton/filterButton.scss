@@ -1,0 +1,32 @@
+.filter {
+    &__button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 4px 8px;
+        border: 1px solid #E5E5E5;
+        border-radius: 4px;
+        background: #FFFFFF;
+        margin-right: 4px;
+    
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.408px;
+        color: #99A0A3;
+        &:active {
+            border: 1px solid #41522E;
+            color: #41522E;
+        }    
+    }
+    &__arrows {
+        padding: 3px 5px;
+        display: flex;
+        flex-direction: column;
+        &span {
+            display: block;
+        }
+    }
+}
