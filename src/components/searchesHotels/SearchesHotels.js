@@ -7,44 +7,28 @@ import img4 from '../../assets/searchesHotels/img4.png';
 import house from '../../assets/searchesHotels/house.svg';
 
 import FavoriteHotel from '../favoriteHotel/FavoriteHotel';
-import {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setDate } from '../../store/actions/actions';
-
-
-const hotels = [
-    {
-        name: 'Moscow Marriott Grand Hotel',
-        date: '28 June, 2020',
-        day: '1',
-        price: '23 924'
-    },
-    {
-        name: 'Moscow Marriott Grand Hotel',
-        date: '28 June, 2020',
-        day: '1',
-        price: '13 924'
-    }
-]
-
+import { addFavorite, delFavorite } from '../favoriteHotels/favoriteHotelsSlice';
 
 export default function SearchesHotels() {
 
-    const {location, date, searchHotels} = useSelector(store => store);
+    const {location, checkInDate, countDays} = useSelector(store => store.searchForm);
+    const {searchHotels} = useSelector(store => store.searchesHotels);
+    const {favoriteHotels} = useSelector(store => store.favoriteHotels);
     const dispatch = useDispatch();
     //Позже будем передавать в стейт избранные отели
 
 
     // Меняем в дате цифру на месяц
-    function updateSearchDate() {
-        let now = new Date();
-        let year = now.getFullYear();
-        let month = now.toLocaleString('en', { month: 'long' });
-        let day = now.getDate();
-        day = (day < 10) ? '0' + day : day;
-        let date = String(`${day} ${month}, ${year}`);
-        return date;
-    }
+    // function updateSearchDate() {
+    //     let now = new Date();
+    //     let year = now.getFullYear();
+    //     let month = now.toLocaleString('en', { month: 'long' });
+    //     let day = now.getDate();
+    //     day = (day < 10) ? '0' + day : day;
+    //     let date = String(`${day} ${month}, ${year}`);
+    //     return date;
+    // }
 
     // Окончание числительных
     function setNameCount(number, five, one, two) {
@@ -66,18 +50,21 @@ export default function SearchesHotels() {
     //преобразуем дату с названием месяца
 
     // динамическая вестка отеля
-    const hotel = hotels.map((item, i) => {
+    const hotel = searchHotels?.map((item) => {
         return (
-            <div key={i} className="searches__result-item">
-            <div className="searches__result-item-img">
-                <img src={house} alt="house" />
+            <div 
+            key={item.hotelId} 
+            className="searches__result-item"
+            onClick={() => dispatch(addFavorite(item))}>
+                <div className="searches__result-item-img">
+                    <img src={house} alt="house" />
+                </div>
+                <FavoriteHotel name={item.hotelName}
+                date={checkInDate}
+                day={countDays}
+                price={item.priceFrom}
+                />
             </div>
-            <FavoriteHotel name={item.name}
-            date={item.date}
-            day={item.day}
-            price={item.price}
-            />
-        </div>
         )
     })
 
@@ -94,7 +81,7 @@ export default function SearchesHotels() {
                     <div className="searches__route-city">{location}</div>
                 </div>
 
-                <div className="searches__date">{date}</div>
+                <div className="searches__date">{checkInDate}</div>
             </div>
 
             <div className="searches__imgs">
@@ -106,13 +93,13 @@ export default function SearchesHotels() {
 
             <div className="searches__result">
                 <div className="searches__result-favorite">
-                Добавлено в Избранное:<span>{searchHotels.length}</span>{setNameCount(searchHotels.length, 'отелей', 'отель', 'отеля')}
+                Добавлено в Избранное:<span>{favoriteHotels?.length}</span>{setNameCount(favoriteHotels?.length, 'отелей', 'отель', 'отеля')}
                 </div>
 
                 <div className="searches__result-hotels">
                     <div className="searches__result-items">
 
-                        {hotels.length > 0 ? hotel : <div style={{'display': 'flex', 'justify-content': 'center'}}>Отели не найдены</div>}
+                        {searchHotels?.length > 0 ? hotel : <div style={{'display': 'flex', 'justifyContent': 'center'}}>Отели не найдены</div>}
 
                     </div>
                 </div>

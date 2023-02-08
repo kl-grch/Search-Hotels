@@ -1,16 +1,19 @@
 import { Link, useNavigate } from "react-router-dom"
 import './appBanner.scss';
 import icon from '../../assets/appBanner/logOut.svg';
+import { useDispatch } from "react-redux";
+import { authorizationFalse } from "../authorizationForm/authorizationSlice";
 
 export default function AppBanner() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const onLogOut = (e) => {
         e.preventDefault();
-        localStorage.setItem('auth', false);
-        navigate('/auth');
+        dispatch(authorizationFalse());
         console.log('Вы вышли с сайта');
+        navigate('/auth');
     }
 
     return (

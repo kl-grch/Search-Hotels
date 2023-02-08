@@ -3,15 +3,13 @@ import * as Yup from 'yup';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setAuthorization } from '../../store/actions/actions';
+import { authorizationTrue } from './authorizationSlice';
 
 function AuthorizationForm() {
 
-    const login = useSelector(state => state.login);
-    const password = useSelector(state => state.password);
-
-    const dispatch = useDispatch();
+    const {login, password} = useSelector(store => store.authorization);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     return (
         <div className="authorization">
@@ -33,11 +31,9 @@ function AuthorizationForm() {
                                 .required('Обязательное поле')
                 })
             }
-            // onSubmit = {values => console.log(JSON.stringify(values, null, 2))}
             onSubmit = {values => {
-                dispatch()
-                localStorage.setItem('auth', true);
                 console.log('Вы авторизованы');
+                dispatch(authorizationTrue({login: values.login, password: values.password}));
                 navigate('/');
             }}
             >
@@ -48,7 +44,8 @@ function AuthorizationForm() {
                                 <Field 
                                 name='login'
                                 type="email" 
-                                className="input" 
+                                className="input"
+                                onInput={(e) => e.login}
                                 />
                                 <ErrorMessage name='login' component='div' className='authorization__error'/>
                             </div>
@@ -58,6 +55,7 @@ function AuthorizationForm() {
                                 name='password'
                                 type="password" 
                                 className="input" 
+                                onInput={(e) => e.password}
                                 />
                                 <ErrorMessage name='password' component='div' className='authorization__error'/>
                             </div>
