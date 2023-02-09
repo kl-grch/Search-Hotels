@@ -1,7 +1,10 @@
-import './favoriteHotel.scss';
-import stars from '../../assets/stars.svg';
+import './hotel.scss';
+import starActive from '../../assets/starActive.svg';
+import starDisable from '../../assets/starDisable.svg';
 
-export default function FavoriteHotel(props) {
+
+
+export default function Hotel(props) {
 
     function setNameCount(number, five, one, two) {
         let n = Math.abs(number);
@@ -17,6 +20,29 @@ export default function FavoriteHotel(props) {
         return two;
         }
         return five;
+    }
+
+    const activeRate = <img src={starActive} alt='starActive'/>;
+    const disableRate = <img src={starDisable} alt='starDisable'/>
+
+    const setRate = () => {
+        if (props.stars === 5) {
+            return <>{activeRate}{activeRate}{activeRate}{activeRate}{activeRate}</>;
+        } else if (props.stars === 4) {
+            return <>{activeRate}{activeRate}{activeRate}{activeRate}{disableRate}</>
+        } else if (props.stars === 3) {
+            return <>{activeRate}{activeRate}{activeRate}{disableRate}{disableRate}</>
+        } else if (props.stars === 2) {
+            return <>{activeRate}{activeRate}{disableRate}{disableRate}{disableRate}</>
+        } else if (props.stars === 1) {
+            return <>{activeRate}{disableRate}{disableRate}{disableRate}{disableRate}</>
+        } else {
+            return <>{disableRate}{disableRate}{disableRate}{disableRate}{disableRate}</>
+
+        }
+
+
+
     }
 
     return (
@@ -41,7 +67,7 @@ export default function FavoriteHotel(props) {
 
             <div className="hotel__rate">
                 <div className="hotel__rate-stars">
-                    <img src={stars} alt="stars" />
+                    {setRate()}
                 </div>
                 <div className="hotel__rate-price">
                     <div className="hotel__rate-price-title">Price:</div>

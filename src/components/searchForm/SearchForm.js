@@ -3,16 +3,19 @@ import * as Yup from 'yup';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useSelector, useDispatch } from 'react-redux';
 import { searchHotels } from '../searchesHotels/searchesHotelsSlice';
-import { setSearchForm, setCheckInDate } from './searchFormSlice';
+import { setSearchForm } from './searchFormSlice';
 import { useEffect } from 'react';
+import dayjs from 'dayjs';
+
 
 export default function SearchForm() {
 
-    const {location, checkInDate, countDays} = useSelector(state => state.searchForm);
+    const {location, checkInDate, checkOutDate, countDays} = useSelector(state => state.searchForm);
+    const {foundHotels} = useSelector(state => state.searchesHotels)
     const dispatch = useDispatch();
 
     const getHotels =  async () =>{
-         await fetch(`http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${checkInDate}&checkOut=${checkInDate}&limit=10`)
+         await fetch(`http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${checkInDate}&checkOut=${checkOutDate}&limit=10`)
             .then((response) => {
                 if (!response.ok) {
                   throw new Error('Error occurred!')
@@ -26,18 +29,8 @@ export default function SearchForm() {
     }
 
     useEffect(() => {
-        dispatch(setCheckInDate({checkInDate: getNowDate()}));
-    }, [])
-
-    useEffect(() => {
         getHotels();
     }, [])
-
-    function getNowDate() {
-        let nowDate = new Date();
-        return nowDate.toLocaleDateString();
-      }
-
 
     return (
         <div className="search">
@@ -52,7 +45,7 @@ export default function SearchForm() {
                     location: Yup.string()
                              .required('Обязательное поле'),
                     checkInDate: Yup.date()
-                                .min(new Date(), 'Дата не может быть меньше текущей')
+                                .min(dayjs().format('YYYY-MM-DD'), 'Дата не может быть меньше текущей')
                                 .required('Обязательное поле'),
                     countDays: Yup.number()
                             .moreThan(1, `Укажите не меньше 1 дня`)
@@ -93,12 +86,11 @@ export default function SearchForm() {
                                 name='countDays'
                                 type="number" 
                                 className="input"
+                                min='1'
                                 onInput={(e) => e.countDays}
                                 />
                                 <ErrorMessage name='countDays' component='div' className='search__error'/>
                             </div>
-
-    
                         </div>
                         <button type='submit' className="button">Найти</button>
                     </Form>                

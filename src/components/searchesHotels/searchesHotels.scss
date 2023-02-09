@@ -36,7 +36,6 @@
     }
     &__imgs {
         width: 600px;
-        // height: 149px;
         margin: 28px 0;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
@@ -89,8 +88,8 @@
             }
             &-img {
                 background: rgba(65, 82, 46, 0.05);
-                width: 64px;
-                height: 64px;
+                min-width: 64px;
+                min-height: 64px;
                 border-radius: 100%;    
                 display: flex;
                 align-items: center;

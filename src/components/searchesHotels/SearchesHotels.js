@@ -6,29 +6,19 @@ import img3 from '../../assets/searchesHotels/img3.png';
 import img4 from '../../assets/searchesHotels/img4.png';
 import house from '../../assets/searchesHotels/house.svg';
 
-import FavoriteHotel from '../favoriteHotel/FavoriteHotel';
+import Hotel from '../hotel/Hotel';
 import { useSelector, useDispatch } from 'react-redux';
-import { addFavorite, delFavorite } from '../favoriteHotels/favoriteHotelsSlice';
+import { addFavorite } from '../favoriteHotels/favoriteHotelsSlice';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 
 export default function SearchesHotels() {
 
     const {location, checkInDate, countDays} = useSelector(store => store.searchForm);
-    const {searchHotels} = useSelector(store => store.searchesHotels);
+    const {foundHotels} = useSelector(store => store.searchesHotels);
     const {favoriteHotels} = useSelector(store => store.favoriteHotels);
     const dispatch = useDispatch();
-    //Позже будем передавать в стейт избранные отели
 
-
-    // Меняем в дате цифру на месяц
-    // function updateSearchDate() {
-    //     let now = new Date();
-    //     let year = now.getFullYear();
-    //     let month = now.toLocaleString('en', { month: 'long' });
-    //     let day = now.getDate();
-    //     day = (day < 10) ? '0' + day : day;
-    //     let date = String(`${day} ${month}, ${year}`);
-    //     return date;
-    // }
 
     // Окончание числительных
     function setNameCount(number, five, one, two) {
@@ -47,10 +37,7 @@ export default function SearchesHotels() {
         return five;
     }
 
-    //преобразуем дату с названием месяца
-
-    // динамическая вестка отеля
-    const hotel = searchHotels?.map((item) => {
+    const hotel = foundHotels?.map((item) => {
         return (
             <div 
             key={item.hotelId} 
@@ -59,9 +46,10 @@ export default function SearchesHotels() {
                 <div className="searches__result-item-img">
                     <img src={house} alt="house" />
                 </div>
-                <FavoriteHotel name={item.hotelName}
-                date={checkInDate}
+                <Hotel name={item.hotelName}
+                date={dayjs(checkInDate).locale('ru').format('DD MMMM YYYY')}
                 day={countDays}
+                stars={item.stars}
                 price={item.priceFrom}
                 />
             </div>
@@ -81,7 +69,7 @@ export default function SearchesHotels() {
                     <div className="searches__route-city">{location}</div>
                 </div>
 
-                <div className="searches__date">{checkInDate}</div>
+                <div className="searches__date">{dayjs(checkInDate).locale('ru').format('DD MMMM YYYY')}</div>
             </div>
 
             <div className="searches__imgs">
@@ -99,7 +87,7 @@ export default function SearchesHotels() {
                 <div className="searches__result-hotels">
                     <div className="searches__result-items">
 
-                        {searchHotels?.length > 0 ? hotel : <div style={{'display': 'flex', 'justifyContent': 'center'}}>Отели не найдены</div>}
+                        {foundHotels?.length > 0 ? hotel : <div style={{'display': 'flex', 'justifyContent': 'center'}}>Отели не найдены</div>}
 
                     </div>
                 </div>

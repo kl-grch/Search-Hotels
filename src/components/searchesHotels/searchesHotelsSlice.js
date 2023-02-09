@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    searchHotels: []
+    foundHotels: []
 }
 
 const searchesHotelsSlice = createSlice({
@@ -9,7 +9,7 @@ const searchesHotelsSlice = createSlice({
     initialState,
     reducers: {
         searchHotels: (state, action) => {
-            state.searchHotels = action.payload;
+            state.foundHotels = action.payload;
         }
     }
 })

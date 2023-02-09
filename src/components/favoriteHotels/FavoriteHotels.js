@@ -1,7 +1,7 @@
 import './favoriteHotels.scss';
 
 import FilterButton from '../filterButton/FilterButton';
-import FavoriteHotel from '../favoriteHotel/FavoriteHotel';
+import Hotel from '../hotel/Hotel';
 
 import { useSelector } from 'react-redux';
 
@@ -12,10 +12,10 @@ export default function FavoriteHotels() {
 
     const hotel = favoriteHotels?.map((item) => {
         return (
-            <FavoriteHotel name={item.hotelName}
+            <Hotel name={item.hotelName}
             date={checkInDate}
             day={countDays}
-            price={item.priceFrom}
+            price={item.priceFrom * countDays}
             stars={item.stars}
             key={item.hotelId}
             />
@@ -28,8 +28,8 @@ export default function FavoriteHotels() {
                 Избранное
             </div>
             <div className="favorite__filters">
-                <FilterButton name={'Рейтинг'}/>
-                <FilterButton name={'Цена'}/>
+                <FilterButton title={'Рейтинг'}/>
+                <FilterButton title={'Цена'}/>
             </div>
             <div className="favorite__hotels">
                 {favoriteHotels?.length > 0 ? hotel : <div style={{'display': 'flex', 'justifyContent': 'center'}}>Нет избранного</div>}
