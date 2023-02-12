@@ -1,13 +1,16 @@
 .filter {
     padding: 4px 8px;
     background: #FFFFFF;
-    border: 1px solid #41522E;
+    border: 1px solid #E5E5E5;
     border-radius: 4px;
     display: flex;
     align-items: center;
     margin-right: 8px;
     &:last-child {
         margin-right: 0;
+    }
+    &-active {
+        border-color: #41522E;
     }
     &__title {
         margin-right: 4px;
@@ -17,8 +20,10 @@
         font-size: 14px;
         line-height: 20px;
         letter-spacing: -0.408px;
-        color: #41522E;
-
+        color: #99A0A3;
+        &-active {
+            color: #41522E;
+        }
     }
     &__arrows {
         height: 18px;
@@ -29,14 +34,25 @@
         align-items: center;
         justify-content: center;
         &-up {
-            img {
+            svg {
                 display: block;
+            }
+            &-active {
+                svg path {
+                    fill: #41522E
+                }
             }
         }
         &-down {
-            img {
+            svg {
                 display: block;
             }
-        }
+            &-active {
+                svg path {
+                    fill: #41522E
+                }
+            }
+
+        }    
     }
 }

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     favoriteHotels: [],
-    favoriteStatus: false
+    filterPriceStatus: '',
+    filterRateStatus: ''
 }
 
 const favoriteHotelsSlice = createSlice({
@@ -10,12 +11,38 @@ const favoriteHotelsSlice = createSlice({
     initialState,
     reducers: {
         addFavorite: (state, action) => {
-            state.favorite = true;
-            state.favoriteHotels.push(action.payload);
-        },
+            state.favoriteHotels.push(action.payload);        },
         delFavorite: (state, action) => {
-            state.favorite = false;
-            state.favoriteHotels = state.favoriteHotels.filter(item => item.id !== action.payload)
+            state.favoriteHotels = state.favoriteHotels.filter(item => {
+              if (item.hotelId === action.payload.hotelId) return false;
+              return item;
+            })
+        },
+        filterRate: (state) => {
+          state.filterPriceStatus = false;
+          state.filterRateStatus = true;
+            state.favoriteHotels = state.favoriteHotels.sort(
+                function(a, b) {
+                    if (a.stars < b.stars) {
+                      return 1; }
+                    if (a.stars > b.stars) {
+                      return -1; }
+                    return 0;
+                  }
+            )
+        },
+        filterPrice: (state) => {
+          state.filterPriceStatus = true;
+          state.filterRateStatus = false;
+          state.favoriteHotels = state.favoriteHotels.sort(
+              function(a, b) {
+                  if (a.priceFrom > b.priceFrom) {
+                    return 1; }
+                  if (a.priceFrom < b.priceFrom) {
+                    return -1; }
+                  return 0;
+                }
+          )
         }
     }
 })
@@ -26,5 +53,7 @@ export default reducer;
 
 export const {
     addFavorite,
-    delFavorite
+    delFavorite,
+    filterRate,
+    filterPrice
 } = actions;

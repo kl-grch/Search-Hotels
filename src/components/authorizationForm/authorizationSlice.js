@@ -2,21 +2,26 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 
-    authorizationStatus: false,
-    login: 'info@liis.su',
-    password: '11111111'
+    authorizationStatus: true,
+    login: '',
+    password: ''
 }
 
 const authorizationSlice = createSlice({
     name: 'authorization',
     initialState,
     reducers: {
-        // authorizationTrue: state => {state.authorization = true},
-        authorizationFalse: state => {state.authorizationStatus = false},
+        authorizationFalse: state => {
+            state.authorizationStatus = false;
+            state.login = '';
+            state.password = '';
+            localStorage.setItem('auth', false);
+        },
         authorizationTrue: (state, action) => {
             state.authorizationStatus = true;
             state.login = action.payload.login;
             state.password = action.payload.password;
+            localStorage.setItem('auth', true);
         }
     }
 })

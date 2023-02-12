@@ -11,7 +11,6 @@ import dayjs from 'dayjs';
 export default function SearchForm() {
 
     const {location, checkInDate, checkOutDate, countDays} = useSelector(state => state.searchForm);
-    const {foundHotels} = useSelector(state => state.searchesHotels)
     const dispatch = useDispatch();
 
     const getHotels =  async () =>{
@@ -30,7 +29,7 @@ export default function SearchForm() {
 
     useEffect(() => {
         getHotels();
-    }, [])
+    })
 
     return (
         <div className="search">
@@ -55,7 +54,8 @@ export default function SearchForm() {
                 })
             }
             onSubmit = {(values) => {
-                dispatch(setSearchForm({location: values.location, checkInDate: values.checkInDate.toString(), countDays:values.countDays}), getHotels());
+                dispatch(setSearchForm({location: values.location, checkInDate: values.checkInDate.toString(), countDays:values.countDays}));
+
             }}
             >
                     <Form className='search__form'>

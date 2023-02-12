@@ -27,6 +27,7 @@
     &__input {
         display: flex;
         flex-direction: column;
+        width: 345px;
         &:nth-child(1) {
             margin-bottom: 24px;
         }
@@ -40,6 +41,9 @@
         display: flex;
         color: #424242;
         margin-bottom: 7px;
+        &-error {
+            color: #EB1717;
+        }
     }
     &__error {
         font-family: 'Roboto';

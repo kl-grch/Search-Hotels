@@ -9,7 +9,7 @@ function App() {
   const {authorizationStatus} = useSelector(state => state.authorization);
 
   function PrivateRoute({ children }) {
-    return authorizationStatus === true ? children : <Navigate to="/auth" />;
+    return authorizationStatus === true ? children : <Navigate to="/auth"/>;
   }
 
   return (

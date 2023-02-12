@@ -43,6 +43,14 @@
     &__rate {
         display: flex;
         justify-content: space-between;
+        &-stars {
+            img{
+                margin-right: 3px;
+                &:last-child {
+                    margin-right: 0;
+                }    
+            }
+        }
         &-price {
             display: flex;
             &-title {

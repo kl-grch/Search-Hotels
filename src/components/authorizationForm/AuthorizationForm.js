@@ -4,6 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { authorizationTrue } from './authorizationSlice';
+import classNames from 'classnames';
 
 function AuthorizationForm() {
 
@@ -14,7 +15,6 @@ function AuthorizationForm() {
     return (
         <div className="authorization">
             <h1 className='authorization__title'>Simple Hotel Check</h1>
-
             <Formik
             initialValues={{
                 login: login,
@@ -40,14 +40,16 @@ function AuthorizationForm() {
                     <Form className='authorization__form'>
                         <div className="authorization__inputs">
                             <div className="authorization__input">
-                                <label className='authorization__label' htmlFor='login'>Логин</label>
+                                <label 
+                                className='authorization__label'
+                                htmlFor='login'>Логин</label>
                                 <Field 
                                 name='login'
-                                type="email" 
+                                type="email"
                                 className="input"
                                 onInput={(e) => e.login}
                                 />
-                                <ErrorMessage name='login' component='div' className='authorization__error'/>
+                                <ErrorMessage id='login' name='login' component='div' className='authorization__error'/>
                             </div>
                             <div className="authorization__input">
                                 <label className='authorization__label' htmlFor='password'>Пароль</label>
