@@ -6,11 +6,13 @@ import AuthorizationForm from '../../authorizationForm/AuthorizationForm';
 
 function AuthorizationPage() {
     return (
-        <Container>
+        // <Container>
             <div className="authorization__page">
-                <AuthorizationForm/>
+                <Container>
+                    <AuthorizationForm/>
+                </Container>
             </div>
-        </Container>
+        // </Container>
     )
 }
 
