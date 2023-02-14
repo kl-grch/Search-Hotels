@@ -26,11 +26,19 @@
         &__title {
             flex-direction: column;
         }
+        &__route {
+            justify-content: center;
+            width: 100%;
+        }
     }
-
  }
 
  @media (max-width: 575.98px) { 
+    .authorization {
+        max-width: 409px;
+        margin: 0 10%;
+    }
+
     .searches {
         &__result {
             &-item {
