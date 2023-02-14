@@ -4,13 +4,12 @@
     box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
     border-radius: 16px;
     margin-bottom: 32px;
+    max-height: calc(90vh - 26px);
+    max-width: 664px;
     &__title {
         display: flex;
         align-items: center;
         justify-content: space-between;
-    }
-    &__hotels {
-        width: 600px;
     }
     &__date {
         font-family: 'Roboto';
@@ -29,6 +28,10 @@
         display: flex;
         align-items: center;
         color: #424242;
+        width: 100%;
+        &-city {
+            overflow: hidden;
+        }
         &-arrow {
             padding: 0 20px;
         }
@@ -37,7 +40,9 @@
         width: 100%;
         margin: 28px 0;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, 164px);
+        grid-auto-flow: column;
+        grid-template-rows: 149px; 
         column-gap: 12px;
         overflow-x: scroll;
         align-items: center;
@@ -54,21 +59,7 @@
     }
 
     &__result {
-        &-hotels {
-            overflow-y: scroll;
-            &::-webkit-scrollbar {
-                width: 2px;
-                background-color: #E7E7E7;
-            }
-            &::-webkit-scrollbar-thumb {
-                background: #41522E;
-                border-radius: 2px;
-            }
-            &::-webkit-scrollbar-track {
-                background-color: #E7E7E7;
-            }
-
-        }
+        max-height: 100%;
         &-favorite {
             font-family: 'Roboto';
             font-style: normal;
@@ -88,11 +79,27 @@
                 color: #41522E;
             }
         }
+        &-hotels {
+            overflow-y: auto;
+            max-height: 350px;
+            &::-webkit-scrollbar {
+                width: 2px;
+                background-color: #E7E7E7;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #41522E;
+                border-radius: 2px;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: #E7E7E7;
+            }
+
+        }
         &-items {
             margin-top: 8px;
             margin-right: 16px;
             //исправить
-            max-height: 600px;
+            // max-height: 326px;
             :last-child {
                 border-bottom: none;
             }
@@ -122,3 +129,20 @@
         }
     }
 }
+
+// @media (max-width: 1199.98px) {
+//     .searches {
+//         max-width: 600px;
+//     }
+// }
+// @media (max-width: 991.98px) {
+
+// }
+
+// @media (max-width: 767.98px) { 
+
+//  }
+
+//  @media (max-width: 575.98px) { 
+
+//   }

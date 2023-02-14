@@ -1,5 +1,5 @@
 import './mainPage.scss';
-import {Container} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 import AppBanner from '../../appBanner/AppBanner';
 import SearchForm from '../../searchForm/SearchForm';
 import FavoriteHotels from '../../favoriteHotels/FavoriteHotels';
@@ -8,9 +8,11 @@ import SearchesHotels from '../../searchesHotels/SearchesHotels';
 function MainPage() {
     return (
         <>
-        <AppBanner/>
+        <Container className='container'>
+            <AppBanner/>
+        </Container>
         <Container>
-        <div className="main">
+            <div className="main">
                 <aside className='main__aside'>
                     <SearchForm/>
                     <FavoriteHotels/>
@@ -18,7 +20,7 @@ function MainPage() {
                 <main>
                     <SearchesHotels/>
                 </main>
-        </div>
+            </div>
         </Container>
         </>
     )
