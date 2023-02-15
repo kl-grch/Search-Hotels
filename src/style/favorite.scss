@@ -1,22 +1,21 @@
-.heart{
+.heart {
+  path {
+    &:hover {
+      fill: #ebebeb;
+      stroke: #c4c4c4;
+      cursor: pointer;
+    }
+    &:active {
+      fill: #e55858;
+      stroke: #e55858;
+      cursor: pointer;
+    }
+  }
+  &-active {
     path {
-        &:hover {
-            fill: #EBEBEB;
-            stroke: #C4C4C4;
-            cursor: pointer;
-        }
-        &:active {
-            fill: #E55858;
-            stroke: #E55858;    
-            cursor: pointer;
-        }
+      fill: #e55858;
+      stroke: #e55858;
+      cursor: pointer;
     }
-    &-active {
-        path {
-            fill: #E55858;
-            stroke: #E55858;    
-            cursor: pointer;    
-        }
-
-    }
+  }
 }

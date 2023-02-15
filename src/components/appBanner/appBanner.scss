@@ -1,49 +1,48 @@
-.app {
-    &__banner {
-        background-color: #E5E5E5;
-        padding: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: 1441px;
+.header {
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1441px;
+  &__logout {
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+.logo {
+  &__link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    align-items: center;
+    color: #424242;
+    text-decoration: none;
+    &:active {
+      color: #424242;
     }
-    &__logo{
-        &-link{
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 24px;
-            line-height: 28px;
-            align-items: center;
-            color: #424242;
-            text-decoration: none;
-            &:active {
-                color: #424242;
-            }
-            &:hover {
-                color: #424242;
-            }
-        }
+    &:hover {
+      color: #424242;
     }
-    &__logout {
-        display: flex;
-        cursor: pointer;
-        text-decoration: none;
-        &-text {
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20px;
-            align-items: center;
-            text-align: right;
-            letter-spacing: -0.408px;
-            color: #41522E;
-            margin-right: 12px;
-        }
-        &-logo {
-            width: 18px;
-            height: 18px;
-        }
-    }
+  }
+}
+
+.logout {
+  &__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    align-items: center;
+    text-align: right;
+    letter-spacing: -0.408px;
+    color: #41522e;
+    margin-right: 12px;
+  }
+  &__icon {
+    width: 18px;
+    height: 18px;
+  }
 }

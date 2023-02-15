@@ -1,10 +1,11 @@
 .wrapper {
-    background: url('../../../assets/authorizationPage/background.png') no-repeat 100%/cover;
+  background: url("../../../assets/authorizationPage/background.png") no-repeat
+    100% / cover;
 }
 
 .authorization__page {
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-    min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
