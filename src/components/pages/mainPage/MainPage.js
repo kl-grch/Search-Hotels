@@ -1,5 +1,5 @@
 import "./mainPage.scss";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import AppBanner from "../../appBanner/AppBanner";
 import SearchForm from "../../searchForm/SearchForm";
 import FavoriteHotels from "../../favoriteHotels/FavoriteHotels";
@@ -10,14 +10,12 @@ function MainPage() {
     <>
       <Container className="container">
         <AppBanner />
-      </Container>
-      <Container>
         <div className="main">
           <aside className="main__aside">
             <SearchForm />
             <FavoriteHotels />
           </aside>
-          <main>
+          <main className="main__searches">
             <SearchesHotels />
           </main>
         </div>

@@ -1,32 +1,18 @@
 import "./hotel.scss";
 import starActive from "../../assets/starActive.svg";
 import starDisable from "../../assets/starDisable.svg";
+import { useEndNumber } from "../../hooks/endNumber.hooks";
 
 import {
   addFavorite,
   delFavorite,
 } from "../favoriteHotels/favoriteHotelsSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 export default function Hotel(props) {
   const dispatch = useDispatch();
-
-  function setNameCount(number, five, one, two) {
-    let n = Math.abs(number);
-    n %= 100;
-    if (n >= 5 && n <= 20) {
-      return five;
-    }
-    n %= 10;
-    if (n === 1) {
-      return one;
-    }
-    if (n >= 2 && n <= 4) {
-      return two;
-    }
-    return five;
-  }
+  const {favoriteHotels} = useSelector(state => state.favoriteHotels);
 
   const setRate = () => {
     const stars = new Array(props.stars).fill(<>{activeRate}</>);
@@ -36,22 +22,20 @@ export default function Hotel(props) {
     return stars;
   };
 
-  const heartActive = classNames("heart", "heart-active");
-
   function numberWithSpaces(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   }
 
   function handleAddFavorite() {
-    if (props.favoriteStatus === true) {
-      dispatch(addFavorite(props));
+    if (!favoriteHotels.some(item => item.hotelId === props.hotelId)) {
+        dispatch(addFavorite(props));
     } else {
       dispatch(delFavorite(props));
     }
   }
 
-  const activeRate = <img src={starActive} alt="starActive" />;
-  const disableRate = <img src={starDisable} alt="starDisable" />;
+  const activeRate = <img key={''} src={starActive} alt="starActive" />;
+  const disableRate = <img key={''} src={starDisable} alt="starDisable" />;
 
   return (
     <div className="hotel">
@@ -59,7 +43,7 @@ export default function Hotel(props) {
         <div className="title__name">{props.hotelName}</div>
         <div className="title__favorite" onClick={handleAddFavorite}>
           <svg
-            className={props.favoriteStatus ? "heart" : heartActive}
+            className={classNames('heart', {'heart--active': props.favoriteStatus})}
             width="23"
             height="20"
             viewBox="0 0 23 20"
@@ -82,7 +66,7 @@ export default function Hotel(props) {
         <span className="date__separator"></span>
         <div className="date__count-day">
           {props.countDays}
-          {setNameCount(props.countDays, "дней", "день", "дня")}
+          {useEndNumber(props.countDays, " дней", " день", " дня")}
         </div>
       </div>
 

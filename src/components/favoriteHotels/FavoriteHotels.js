@@ -4,9 +4,8 @@ import FilterButton from "../filterButton/FilterButton";
 import Hotel from "../hotel/Hotel";
 import { useSelector, useDispatch } from "react-redux";
 import { filterRate, filterPrice } from "./favoriteHotelsSlice";
-import classNames from "classnames";
 
-export default function FavoriteHotels(props) {
+export default function FavoriteHotels() {
   const { favoriteHotels, filterRateStatus, filterPriceStatus } = useSelector(
     (store) => store.favoriteHotels
   );
@@ -19,12 +18,14 @@ export default function FavoriteHotels(props) {
         hotelName={item.hotelName}
         checkInDate={item.checkInDate}
         countDays={item.countDays}
-        priceFrom={item.priceFrom * item.countDays}
+        priceFrom={item.priceFrom}
         stars={item.stars}
         hotelId={item.hotelId}
+        favoriteStatus={item.favoriteStatus}
       />
     );
   });
+
 
   return (
     <div className="favorites">
@@ -36,16 +37,7 @@ export default function FavoriteHotels(props) {
           onClick={
             favoriteHotels?.length > 0 ? () => dispatch(filterRate()) : null
           }
-          filterRateStatus
-          filterActiveBorder={classNames("filter", {
-            "filter--active": filterRateStatus,
-          })}
-          filterActiveTitle={classNames("filter__title", {
-            "filter__title--active": filterRateStatus,
-          })}
-          filterActiveArrowUp={classNames("filter__arrows-up", {
-            "filter__arrows-up--active": filterRateStatus,
-          })}
+          isActive={filterRateStatus}
         />
         <FilterButton
           title={"Цена"}
@@ -53,16 +45,7 @@ export default function FavoriteHotels(props) {
           onClick={
             favoriteHotels?.length > 0 ? () => dispatch(filterPrice()) : null
           }
-          filterPriceStatus
-          filterActiveBorder={classNames("filter", {
-            "filter--active": filterPriceStatus,
-          })}
-          filterActiveTitle={classNames("filter__title", {
-            "filter__title--active": filterPriceStatus,
-          })}
-          filterActiveArrowUp={classNames("filter__arrows-up", {
-            "filter__arrows-up--active": filterPriceStatus,
-          })}
+          isActive={filterPriceStatus}
         />
       </div>
       <div className="favorites__hotels">

@@ -6,32 +6,16 @@
   margin-bottom: 30px;
   max-height: calc(90vh - 30px);
   max-width: 664px;
+  &__hotels {
+    height: 100%;
+  }
+}
+
+.hotels {
   &__title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  &__date {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
-    color: #41522e;
-  }
-  &__route {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 32px;
-    line-height: 38px;
-    display: flex;
-    align-items: center;
-    color: #424242;
-    &-city {
-      overflow: hidden;
-    }
-    &-arrow {
-      padding: 0 20px;
-    }
   }
   &__imgs {
     width: 100%;
@@ -57,73 +41,116 @@
       border-radius: 10px;
     }
   }
-  &__hotels {
-    height: 100%;
-  }
   &__result {
     max-height: 100%;
-    &-favorite {
-      font-style: normal;
-      font-weight: 300;
+  }
+}
+
+.title {
+  &__route {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+    display: flex;
+    align-items: center;
+    color: #424242;
+  }
+  &__date {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #41522e;
+  }
+}
+
+.route {
+  &__arrow {
+    padding: 0 20px;
+  }
+  &__city {
+    overflow: hidden;
+  }
+}
+
+.result {
+  &__favorite {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424242;
+    margin-bottom: 12px;
+    span {
+      margin-left: 8px;
+      margin-right: 4px;
+      font-weight: 500;
       font-size: 17px;
       line-height: 22px;
       letter-spacing: -0.408px;
-      color: #424242;
-      margin-bottom: 12px;
-      span {
-        margin-left: 8px;
-        margin-right: 4px;
-        font-weight: 500;
-        font-size: 17px;
-        line-height: 22px;
-        letter-spacing: -0.408px;
-        color: #41522e;
-      }
+      color: #41522e;
     }
-    &-hotels {
-      overflow-y: scroll;
-      &::-webkit-scrollbar {
-        width: 2px;
-        background-color: #e7e7e7;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: #41522e;
-        border-radius: 2px;
-      }
-      &::-webkit-scrollbar-track {
-        background-color: #e7e7e7;
-      }
+  }
+  &__hotels {
+    overflow-y: scroll;
+    // scroll-snap-align: start;
+    &::-webkit-scrollbar {
+      width: 2px;
+      background-color: #e7e7e7;
     }
-    &-items {
-      margin-top: 8px;
-      margin-right: 16px;
-      max-height: 326px;
-      :last-child {
-        border-bottom: none;
-      }
+    &::-webkit-scrollbar-thumb {
+      background: #41522e;
+      border-radius: 2px;
     }
-    &-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(135, 135, 135, 0.2);
-      :last-child {
-        border-bottom: none;
-      }
-      &-img {
-        background: rgba(65, 82, 46, 0.05);
-        min-width: 64px;
-        min-height: 64px;
-        border-radius: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 24px;
-        img {
-          width: 35px;
-          height: 35px;
-        }
-      }
+    &::-webkit-scrollbar-track {
+      background-color: #e7e7e7;
+    }
+  }
+}
+
+.hotels {
+  &__items {
+    margin-top: 8px;
+    margin-right: 16px;
+    max-height: 326px;
+    // scroll-snap-align: start;
+    :last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.items {
+  &__not-found {
+    display: flex;
+    justify-content: center;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(135, 135, 135, 0.2);
+    :last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.item {
+  &__img {
+    background: rgba(65, 82, 46, 0.05);
+    min-width: 64px;
+    min-height: 64px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 24px;
+    img {
+      width: 35px;
+      height: 35px;
     }
   }
 }

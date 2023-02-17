@@ -66,9 +66,9 @@ export default function SearchForm() {
         }}
       >
         <Form className="search__form">
-          <div className="search__inputs">
-            <div className="search__input">
-              <label className="search__label" htmlFor="location">
+          <div className="form__inputs">
+            <div className="inputs__input">
+              <label className="input__label" htmlFor="location">
                 Локация
               </label>
               <Field
@@ -80,11 +80,11 @@ export default function SearchForm() {
               <ErrorMessage
                 name="location"
                 component="div"
-                className="search__error"
+                className="input__error"
               />
             </div>
-            <div className="search__input">
-              <label className="search__label" htmlFor="checkInDate">
+            <div className="inputs__input">
+              <label className="input__label" htmlFor="checkInDate">
                 Дата заселения
               </label>
               <Field
@@ -96,11 +96,11 @@ export default function SearchForm() {
               <ErrorMessage
                 name="checkInDate"
                 component="div"
-                className="search__error"
+                className="input__error"
               />
             </div>
-            <div className="search__input">
-              <label className="search__label" htmlFor="countDays">
+            <div className="inputs__input">
+              <label className="input__label" htmlFor="countDays">
                 Количество дней
               </label>
               <Field
@@ -113,7 +113,7 @@ export default function SearchForm() {
               <ErrorMessage
                 name="countDays"
                 component="div"
-                className="search__error"
+                className="input__error"
               />
             </div>
           </div>

@@ -4,36 +4,29 @@ import house from "../../assets/searchesHotels/house.svg";
 
 import Hotel from "../hotel/Hotel";
 import { useSelector } from "react-redux";
+import { useEndNumber } from "../../hooks/endNumber.hooks";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 
 export default function SearchesHotels() {
-  const { location, checkInDate, countDays } = useSelector(
+  const { checkInDate, countDays } = useSelector(
     (store) => store.searchForm
   );
   const { foundHotels, images } = useSelector((store) => store.searchesHotels);
   const { favoriteHotels } = useSelector((store) => store.favoriteHotels);
 
-  function setNameCount(number, five, one, two) {
-    let n = Math.abs(number);
-    n %= 100;
-    if (n >= 5 && n <= 20) {
-      return five;
+  function getFavoriteStatus(status) {
+    if (favoriteHotels.some(item => item.hotelId === status)) {
+      return true;
     }
-    n %= 10;
-    if (n === 1) {
-      return one;
-    }
-    if (n >= 2 && n <= 4) {
-      return two;
-    }
-    return five;
   }
 
+
   const hotel = foundHotels?.map((item) => {
+  
     return (
-      <div key={item.hotelId} className="searches__result-item">
-        <div className="searches__result-item-img">
+      <div key={item.hotelId} className="items__item">
+        <div className="item__img">
           <img src={house} alt="house" />
         </div>
         <Hotel
@@ -43,7 +36,7 @@ export default function SearchesHotels() {
           stars={item.stars}
           priceFrom={item.priceFrom}
           hotelId={item.hotelId}
-          favoriteStatus
+          favoriteStatus={getFavoriteStatus(item.hotelId)}
         />
       </div>
     );
@@ -56,34 +49,34 @@ export default function SearchesHotels() {
   return (
     <div className="searches">
       <div className="searches__hotels">
-        <div className="searches__title">
-          <div className="searches__route">
-            <div className="searches__route-hotel">Отели</div>
-            <div className="searches__route-arrow">
-              <img src={arrow} alt="arrow" />
+        <div className="hotels__title">
+          <div className="title__route">
+            <div className="route__hotel">Отели</div>
+            <div className="route__arrow">
+              <img src={arrow} alt="route-arrow" />
             </div>
-            <div className="searches__route-city">{location}</div>
+            <div className="route__city">{foundHotels[0]?.location.name ? foundHotels[0]?.location.name : 'Не найдены' }</div>
           </div>
 
-          <div className="searches__date">
+          <div className="title__date">
             {dayjs(checkInDate).locale("ru").format("DD MMMM YYYY")}
           </div>
         </div>
 
-        <div className="searches__imgs">{image}</div>
+        <div className="hotels__imgs" id="horizontal-scroller">{image}</div>
 
-        <div className="searches__result">
-          <div className="searches__result-favorite">
-            Добавлено в Избранное:<span>{favoriteHotels?.length}</span>
-            {setNameCount(favoriteHotels?.length, "отелей", "отель", "отеля")}
+        <div className="hotels__result">
+          <div className="result__favorite">
+            Добавлено в Избранное:<span>{favoriteHotels?.length ? favoriteHotels?.length : 0}</span>
+            {useEndNumber(favoriteHotels?.length, "отелей", "отель", "отеля")}
           </div>
 
-          <div className="searches__result-hotels">
-            <div className="searches__result-items">
+          <div className="result__hotels">
+            <div className="hotels__items">
               {foundHotels?.length > 0 ? (
                 hotel
               ) : (
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className="items__not-found">
                   Отели не найдены
                 </div>
               )}

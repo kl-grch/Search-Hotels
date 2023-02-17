@@ -3,6 +3,7 @@
     max-width: 550px;
   }
 }
+
 @media (max-width: 991.98px) {
   .main {
     justify-content: center;
@@ -12,9 +13,9 @@
       width: 100%;
       margin-right: 0;
     }
-  }
-  main {
-    width: 100%;
+    &__searches {
+      width: 100%;
+    }
   }
   .searches {
     min-width: 100%;
@@ -22,10 +23,13 @@
 }
 
 @media (max-width: 767.98px) {
-  .searches {
+  .hotels {
     &__title {
       flex-direction: column;
     }
+  }
+
+  .title {
     &__route {
       justify-content: center;
       width: 100%;
@@ -39,13 +43,9 @@
     margin: 0 10%;
   }
 
-  .searches {
-    &__result {
-      &-item {
-        &-img {
-          display: none;
-        }
-      }
+  .item {
+    &__img {
+      display: none;
     }
   }
 }

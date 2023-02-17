@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   favoriteHotels: [],
   filterPriceStatus: "",
-  filterRateStatus: "",
+  filterRateStatus: ""
 };
 
 const favoriteHotelsSlice = createSlice({
@@ -11,7 +11,7 @@ const favoriteHotelsSlice = createSlice({
   initialState,
   reducers: {
     addFavorite: (state, action) => {
-      state.favoriteHotels.push(action.payload);
+      state.favoriteHotels.push({...action.payload, favoriteStatus: true});
     },
     delFavorite: (state, action) => {
       state.favoriteHotels = state.favoriteHotels.filter((item) => {
@@ -23,15 +23,16 @@ const favoriteHotelsSlice = createSlice({
       state.filterPriceStatus = false;
       state.filterRateStatus = true;
       state.favoriteHotels = state.favoriteHotels.sort(function (a, b) {
-        if (a.stars < b.stars) {
+        if (a.priceFrom < b.priceFrom) {
           return 1;
         }
-        if (a.stars > b.stars) {
+        if (a.priceFrom > b.priceFrom) {
           return -1;
         }
         return 0;
       });
     },
+    
     filterPrice: (state) => {
       state.filterPriceStatus = true;
       state.filterRateStatus = false;
